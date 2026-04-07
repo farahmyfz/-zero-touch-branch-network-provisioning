@@ -1,0 +1,13 @@
+---
+- name: Fase 3 - Automasi Konfigurasi Dasar dan Layanan
+  hosts: router
+  gather_facts: false
+
+  tasks:
+    - name: 0. Konfigurasi IP Interface
+      community.routeros.command:
+        commands:
+          - /ip address add address=192.168.11.10/24 interface=ether1 comment="WAN"
+          - /ip address add address=192.168.10.1/24 interface=ether2 comment="LAN_to_R2"
+      ignore_errors: true
+
