@@ -1,0 +1,25 @@
+---
+- name: Fase 3 - Automasi Konfigurasi Dasar dan Layanan
+  hosts: router
+  gather_facts: false
+
+  tasks:
+    - name: 1. Mengubah Hostname
+      community.routeros.command:
+        commands:
+          - /system identity set name="{{ inventory_hostname }}"
+
+    - name: 2. Konfigurasi DNS Server
+      community.routeros.command:
+        commands:
+          - /ip dns set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
+
+    - name: 3. Konfigurasi NTP Client
+      community.routeros.command:
+        commands:
+          - /system ntp client set enabled=yes servers=0.id.pool.ntp.org,1.id.pool.ntp.org
+
+    - name: 4. Membuat User Management Baru (Keamanan)
+      community.routeros.command:
+        commands:
+          - /user add name=netdevops password=amanaman group=full
