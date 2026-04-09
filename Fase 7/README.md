@@ -69,6 +69,6 @@ Setelah infrastruktur berjalan, ikuti langkah-langkah berikut untuk menghubungka
    ```text
    14420
    ```
-3. Klik tombol Load
+3. Klik tombol `Load`
 4. Pada opsi Selection, bagian `DS_PROMETHEUS` (atau Prometheus), pilih data source Prometheus yang baru saja kamu buat
 5. Klik Import
