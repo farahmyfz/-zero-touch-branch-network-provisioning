@@ -5,7 +5,17 @@ Menulis playbook ansible/skrip automasi untuk melakukan push konfigurasi secara 
 2. Konfigurasi DNS Server, NTP Server, dan User Management (file bernama "setup_sistem.yml")
 3. Mengamankan port dan memberikan IP Address pada interface yang mengarah ke jaringan lokal
 
-*pada WSL*
-### Kasuk Ke Folder Proyek 
----
+### *Pada WSL*
+
+**1. Masuk ke Folder Proyek Di WSL**
+```routeros
+cd proyek
+```
+**2. Buat Fofer Baru bernama "setup_sistem.yml"**
+```routeros
+nano setup_sistem.yml
+```
+**3. Menulis Code Automatisasi Configurasi Dasar & Layanan**
+```routeros
+File setup_sistem.yml
 ```
