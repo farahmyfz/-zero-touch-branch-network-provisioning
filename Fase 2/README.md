@@ -14,25 +14,41 @@ Memperkenalkan konsep _Software Engineering_ ke dalam manajemen jaringan.
 
 ## Tutorial Instalasi Ansible di WSL:
 1. Update Repository:
-   `sudo apt update`
+```routeros
+sudo apt update
+```
 2. Instal Software Properties:
-   `sudo apt install software-properties-common`
-3. Tambahkan PPA Ansible:
-   `sudo add-apt-repository --yes --update ppa:ansible/ansible`
-4. Instal Ansible:
-   `sudo apt install ansible`
-5. Verifikasi:
-   `ansible --version`
+```routeros
+sudo apt install software-properties-common
+```
+4. Tambahkan PPA Ansible:
+```routeros
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+```
+6. Instal Ansible:
+```routeros
+sudo apt install ansible
+```
+8. Verifikasi:
+```routeros
+ansible --version
+```
 
 ---
 
 ## Konfigurasi Konektivitas:
 1. Generate SSH Key di Control Node:
-   `ssh-keygen -t rsa -b 4096`
-2. Copy Public Key ke Target:
-   `ssh-copy-id user@ip_address_target`
-3. Pastikan Anda bisa masuk tanpa password:
-   `ssh user@ip_address_target`
+```routeros
+ssh-keygen -t rsa -b 4096
+```
+3. Copy Public Key ke Target:
+```routeros
+ssh-copy-id user@ip_address_target
+```
+5. Pastikan Anda bisa masuk tanpa password:
+```routeros
+ssh user@ip_address_target
+```
 
 ---
 
