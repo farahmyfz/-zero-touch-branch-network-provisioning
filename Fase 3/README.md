@@ -19,4 +19,8 @@ nano setup_sistem.yml
 ```routeros
 File setup_sistem.yml
 ```
-
+```text
+project/
+│
+├── hosts.ini
+├── setup_sistem.yml
