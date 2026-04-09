@@ -1,3 +1,6 @@
+## Fase 6: Pengenalan GitOps & CI/CD Sederhana
+--
+
 Memindahkan eksekusi automatisasi dari laptop lokal (manual) ke dalam pipeline otomatis. 
 Mengintgrasi repositori proyek dengan platform CI/CD (seperti GitHub Action atau GitLab CI). Praktik harus membuat pipline sederhana yang memiliki kemampuan:
    
