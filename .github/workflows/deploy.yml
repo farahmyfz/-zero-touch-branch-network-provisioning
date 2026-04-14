@@ -3,10 +3,10 @@ name: NetDevOps Automation Pipeline
 on:
   push:
     branches: [ main ]
-
+  workflow_dispatch:  # <--- TAMBAHKAN BARIS INI
 jobs:
   deploy:
-    runs-on: self-hosted  # Ini perintah untuk mencari Runner di laptopmu
+    runs-on: self-hosted
     steps:
       - name: Ambil Kode Terbaru dari GitHub
         uses: actions/checkout@v4
