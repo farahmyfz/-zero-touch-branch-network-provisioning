@@ -66,16 +66,8 @@ app.post('/api/save-and-deploy', async (req, res) => {
 
         await updateFile('hosts.ini', hosts, 'Update via Telkom Control Center');
         await updateFile('setup_sistem.yml', yaml, 'Update via Telkom Control Center');
-
-        console.log(" [TELKOM-OPS] Triggering GitHub Actions Pipeline...");
-        await octokit.actions.createWorkflowDispatch({
-            owner, repo,
-            workflow_id: 'deploy.yml',
-            ref: 'main',
-            inputs: { target_router: 'R1' }
-        });
-
-        res.json({ status: "success", message: "Deployment Pipeline Started!" });
+        
+        res.json({ status: "success", message: "Configuration Updated & Pipeline Started!" });
     } catch (error) {
         console.error("❌ [ERROR]", error.message);
         res.status(500).json({ status: "error", message: error.message });
