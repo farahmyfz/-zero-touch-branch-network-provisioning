@@ -55,6 +55,14 @@
         commands:
           - /ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
 
+    - name: 6.5 Konfigurasi DHCP Server untuk LAN
+      community.routeros.command:
+        commands:
+          - /ip pool add name=pool-lan ranges=192.168.10.10-192.168.10.100
+          - /ip dhcp-server add name=server-lan interface=ether2 address-pool=pool-lan disabled=no
+          - /ip dhcp-server network add address=192.168.10.0/24 gateway=192.168.10.1 dns-server=8.8.8.8
+      ignore_errors: true
+
     - name: 7. Pengujian/Validasi Koneksi (Ping ke DNS Google)
       community.routeros.command:
         commands:
@@ -152,7 +160,6 @@
   <div class="bg-[#0F172A] p-6 rounded-2xl border border-slate-800 flex justify-between items-center mb-8">
     <div>
       <p class="text-white font-bold text-lg italic">MikroTik - R1</p>
-      <p class="text-xs text-blue-400 font-mono tracking-widest uppercase">Target: Primary Branch</p>
     </div>
     <button 
       on:click={handleDeploy} 
