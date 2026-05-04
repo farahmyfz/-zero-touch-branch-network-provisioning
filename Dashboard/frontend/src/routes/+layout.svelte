@@ -1,9 +1,8 @@
-<script>
-    import './layout.css'; 
+<script>import "../app.css";
+import './layout.css';
 
-    /** @type {{children: import('svelte').Snippet}} */
-    let { children } = $props();
-</script>
+/** @type {{children: import('svelte').Snippet}} */
+let { children } = $props();</script>
 
 {@render children()}
 
