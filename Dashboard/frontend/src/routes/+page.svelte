@@ -115,7 +115,6 @@ ansible_network_os=routeros`;
   let status = "system ready";
   let isLoading = false;
   let alerts = []; // Array untuk menampung log dari backend
-  let stats = { ok: 0, failed: 0, runs: 0 };
 
   // --- Socket.io Logic ---
   onMount(() => {
@@ -134,10 +133,7 @@ ansible_network_os=routeros`;
       };
 
       alerts = [newLog, ...alerts];
-      
-      // Update stats sederhana
-      if (isSecurity) stats.failed += 1;
-      else stats.ok += 1;
+
     });
 
     return () => socket.disconnect();
@@ -147,7 +143,6 @@ ansible_network_os=routeros`;
   async function handleDeploy() {
     isLoading = true;
     status = "running pipeline...";
-    stats.runs += 1;
     try {
       const res = await fetch('http://localhost:5000/api/save-and-deploy', {
         method: 'POST',
