@@ -21,6 +21,7 @@ ansible_network_os=routeros`;
         commands:
           - /ip address add address=192.168.11.10/24 interface=ether1 comment="WAN"
           - /ip address add address=192.168.10.1/24 interface=ether2 comment="LAN_to_R2"
+          - /ip address add address=192.168.10.50/24 interface=ether3 comment="CLIENT"
       ignore_errors: true
 
     - name: 1. Mengubah Hostname
@@ -79,37 +80,32 @@ ansible_network_os=routeros`;
       debug:
         msg: "{{ hasil_ping.stdout_lines }}"
 
-    - name: 9. Konfigurasi SNMP (Monitoring)
+    - name: 9. Menarik konfigurasi (Stdout Mode)
       community.routeros.command:
         commands:
-          - /snmp set enabled=yes contact="Admin NetDevOps" location="Lab Data Center"
+          - /export
+      register: hasil_export
 
-    - name: 10. Konfigurasi Syslog (Remote Logging)
+    - name: 10 Memastikan folder backup ada
+      ansible.builtin.file:
+        path: "./backups"
+        state: directory
+      delegate_to: localhost
+
+    - name: 11. Menyimpan hasil export ke laptop
+      ansible.builtin.copy:
+        content: "{{ hasil_export.stdout[0] }}"
+        dest: "./backups/backup_{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.rsc"
+      delegate_to: localhost
+
+    - name: 12. Konfigurasi Syslog (Remote Logging)
       community.routeros.command:
         commands:
           - /system logging action set [find name="remote"] target=remote remote=192.168.10.10 remote-port=5514
           - /system logging add action=remote topics=info
           - /system logging add action=remote topics=error
           - /system logging add action=remote topics=warning
-      ignore_errors: true
-
-    - name: 11. Menarik konfigurasi (Stdout Mode)
-      community.routeros.command:
-        commands:
-          - /export
-      register: hasil_export
-
-    - name: 11.5 Memastikan folder backup ada
-      ansible.builtin.file:
-        path: "./backups"
-        state: directory
-      delegate_to: localhost
-
-    - name: 12. Menyimpan hasil export ke laptop
-      ansible.builtin.copy:
-        content: "{{ hasil_export.stdout[0] }}"
-        dest: "./backups/backup_{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.rsc"
-      delegate_to: localhost`;
+      ignore_errors: true`;
 
   // --- UI State ---
   let status = "system ready";
