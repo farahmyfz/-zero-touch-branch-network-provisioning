@@ -1,4 +1,6 @@
 <script>
+    import { goto } from '$app/navigation';
+
     // State untuk form login
     let email = '';
     let password = '';
@@ -10,7 +12,9 @@
         // Simulasi request ke backend API
         setTimeout(() => {
             console.log('Login attempt with:', email);
+            localStorage.setItem('isAuthenticated', 'true');
             isLoading = false;
+            goto('/dashboard'); 
         }, 1500);
     };
 </script>
