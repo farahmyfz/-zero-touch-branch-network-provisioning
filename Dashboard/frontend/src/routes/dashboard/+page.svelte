@@ -34,6 +34,10 @@ ansible_network_os=routeros`;
     - name: 0. Konfigurasi IP Interface
       community.routeros.command:
         commands:
+          - /ip address remove [find interface=ether3]
+          - /ip address remove [find interface=ether4]
+          - /ip address remove [find interface=ether5]
+
           - /ip address add address=192.168.11.10/24 interface=ether1 comment="WAN"
           - /ip address add address=192.168.10.1/24 interface=ether2 comment="LAN_to_R2"
           - /ip address add address=192.168.10.50/24 interface=ether3 comment="CLIENT"
